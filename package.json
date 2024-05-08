@@ -10,6 +10,7 @@
     "tailwindcss": "^3.4.3"
   },
   "scripts": {
-    "dev": "node index.js"
+    "dev": "node watcher.js",
+    "build": "node build.js"
   }
 }

@@ -7,13 +7,9 @@ const srcDir = 'src';
 const distDir = 'dist';
 
 function processCSS() {
-    exec('npx tailwindcss build src/*.css -o dist/main.css', (error, stdout, stderr) => {
+    exec('npx tailwindcss build -i src/main.css -o dist/main.css', (error, stdout, stderr) => {
         if (error) {
             console.error(`Error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.error(`stderr: ${stderr}`);
             return;
         }
     });
@@ -32,12 +28,8 @@ async function copyOtherFiles() {
 }
 
 chokidar.watch(srcDir).on('all', (event, path) => {
-    // console.log(`File ${path} has been ${event}`);
-    if (path.endsWith('.css')) {
-        processCSS();
-    } else {
-        copyOtherFiles();
-    }
+    processCSS();
+    copyOtherFiles();
 });
 
 browserSync.init({
@@ -45,6 +37,5 @@ browserSync.init({
 });
 
 chokidar.watch(distDir).on('all', (event, path) => {
-    console.log(`Reloading browser...`);
     browserSync.reload();
 });

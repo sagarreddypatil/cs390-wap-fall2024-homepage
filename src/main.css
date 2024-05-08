@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button {
+    @apply px-4 py-2 outline outline-1 outline-black dark:outline-white font-bold text-xl hover:dark:bg-white hover:dark:text-black hover:text-white
+}
